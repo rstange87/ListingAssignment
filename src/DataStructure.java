@@ -1,37 +1,29 @@
 import java.util.Scanner;
 
-public class DataStructure {
-    private Listing[] data;
-    private int size = 100;
+public class DataStructure <T> {
+    private T[] data;
     private int next = 0;
 
     public DataStructure() {
-        new DataStructure(this.size);
+        this(100);
     }
-    public DataStructure(int numberOfListings){
-        this.data = new Listing[numberOfListings];
-        for(int i=0; i<numberOfListings; i++) {
-            this.data[i] = new Listing();
-        }
+    private DataStructure(int numberOfListings){
+        this.data = (T[]) new Object[numberOfListings];
     }
-    public void addListing(Listing newListing){
-        if(size == next) {
+    private void addElement(T newElement){
+        if(this.data.length == next) {
             System.out.print("Listings are full!\n");
         } else {
-            int tempAge = newListing.getAge();
-            this.data[this.next].setName(newListing.getName());
-            this.data[this.next].setAge(newListing.getAge());
+            this.data[this.next] = newElement;
             next++;
         }
     }
-    public void showAllListings(){
+    private void showAllListings(){
         if (this.next == 0) {
             System.out.print("The list is empty!\n");
         } else {
             for (int i = 0; i < this.next; i++) {
-                if ("" != this.data[i].getName()) {
-                    System.out.print(this.data[i].toString());
-                }
+                System.out.print(this.data[i].toString());
             }
         }
     }
@@ -63,7 +55,7 @@ public class DataStructure {
                 int tempAge = myScanner.nextInt();
                 myScanner.reset();
                 Listing tempListing = new Listing(tempName, tempAge);
-                myDataStructure.addListing(tempListing);
+                myDataStructure.addElement(tempListing);
                 System.out.print("Listing has been added:\n");
                 System.out.print(myDataStructure.data[myDataStructure.next - 1].toString());
             } else if (userOption == 3) {
@@ -75,7 +67,7 @@ public class DataStructure {
                 int tempAge = myScanner.nextInt();
                 myScanner.reset();
                 for (int i=0; i<100 ; i++) {
-                    if ((listingFound == false) && (myDataStructure.data[i].getName().equals(tempName)) && (myDataStructure.data[i].getAge() == tempAge)) {
+                    if ((!listingFound) && (myDataStructure.data[i].getName().equals(tempName)) && (myDataStructure.data[i].getAge() == tempAge)) {
                         System.out.print("Listing found:\n");
                         System.out.print(myDataStructure.data[i].toString());
                         System.out.print("Please enter the new name: ");
@@ -91,7 +83,7 @@ public class DataStructure {
                         listingFound = true;
                     }
                 }
-                if (listingFound == false) {
+                if (!listingFound) {
                     System.out.print("Listing not found!\n");
                 }
             }

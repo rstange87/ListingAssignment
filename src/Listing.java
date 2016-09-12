@@ -18,13 +18,6 @@ public class Listing {
         tempString += "Name:"+getName()+"  Age:"+getAge()+"\n";
         return tempString;
     }
-    public void input(){
-        Scanner myScanner = new Scanner(System.in);
-        System.out.print("Please enter a name: ");
-        setName(myScanner.nextLine());
-        System.out.print("Please enter an age: ");
-        setAge(myScanner.nextInt());
-    }
     public void setName(String sName) {
         name = sName;
     }
