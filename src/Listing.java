@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Listing {
+public class Listing{
 
     private String name;
     private int age;
